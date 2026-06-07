@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 180" role="img" aria-labelledby="title desc">
+  <title id="title">Cambria Veterinary Center</title><desc id="desc">Text and monogram fallback logo for Cambria Veterinary Center</desc>
+  <rect width="780" height="180" rx="26" fill="#F7F3EA"/>
+  <circle cx="92" cy="90" r="56" fill="#5E101D"/>
+  <path d="M64 89c13-20 44-20 57 0 7 11 4 27-8 36-12 9-30 9-42 0-12-9-15-25-7-36z" fill="#A90A30"/>
+  <circle cx="70" cy="63" r="11" fill="#869F12"/><circle cx="92" cy="55" r="12" fill="#869F12"/><circle cx="114" cy="63" r="11" fill="#869F12"/>
+  <text x="172" y="82" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="700" fill="#5E101D">Cambria</text>
+  <text x="172" y="128" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" letter-spacing="2.5" fill="#545454">VETERINARY CENTER</text>
+  <rect x="170" y="139" width="482" height="6" rx="3" fill="#869F12"/>
+</svg>

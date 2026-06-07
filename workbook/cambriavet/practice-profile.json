@@ -1,0 +1,101 @@
+{
+  "siteId": "cambriavet-vetstreet-com",
+  "source": {
+    "url": "http://cambriavet.vetstreet.com/",
+    "pages": [
+      "http://cambriavet.vetstreet.com/",
+      "http://cambriavet.vetstreet.com/services.html",
+      "http://cambriavet.vetstreet.com/our_staff.html",
+      "http://cambriavet.vetstreet.com/contact_us.html"
+    ],
+    "notes": [
+      "HTTPS version returned 404 in the brief; HTTP lowercase source works.",
+      "Vetstreet/Covetrus favicons and map icons are platform assets, not a practice logo.",
+      "No source-specific logo was available, so the demo uses a local text/monogram brand fallback."
+    ]
+  },
+  "practice": {
+    "name": "Cambria Veterinary Center",
+    "shortName": "Cambria Vet",
+    "tagline": "Full-service veterinary medical care in Whiteford, Maryland.",
+    "description": "Cambria Veterinary Center is a full-service veterinary medical facility in Whiteford, MD, providing medical, surgical, dental, wellness, diagnostic, and preventive care for pets in Whiteford and surrounding communities.",
+    "serviceArea": "Whiteford, MD and surrounding areas"
+  },
+  "contact": {
+    "phone": "(410) 399-0344",
+    "phoneHref": "tel:+14103990344",
+    "publicEmail": "",
+    "publicEmailStatus": "Not published in the demo per brief. Use phone and the source-site contact form guidance rather than inventing or exposing an address.",
+    "address": {
+      "street": "2756 Whiteford Road",
+      "line2": "",
+      "city": "Whiteford",
+      "state": "MD",
+      "zip": "21160",
+      "country": "US"
+    }
+  },
+  "hours": [
+    { "day": "Monday", "open": "09:00", "close": "18:00", "raw": "9:00 AM - 6:00 PM" },
+    { "day": "Tuesday", "open": "09:00", "close": "17:00", "raw": "9:00 AM - 5:00 PM" },
+    { "day": "Wednesday", "open": "", "close": "", "raw": "Closed" },
+    { "day": "Thursday", "open": "09:00", "close": "18:00", "raw": "9:00 AM - 6:00 PM" },
+    { "day": "Friday", "open": "09:00", "close": "17:00", "raw": "9:00 AM - 5:00 PM" },
+    { "day": "Saturday", "open": "08:00", "close": "12:00", "raw": "8:00 AM - 12:00 PM" },
+    { "day": "Sunday", "open": "", "close": "", "raw": "Closed" }
+  ],
+  "team": [
+    {
+      "name": "Amy Hartman, VMD",
+      "role": "Practice Owner",
+      "bio": "Listed publicly on the Cambria Veterinary Center staff page as Practice Owner. No full biography or headshot was available from the source site.",
+      "image": ""
+    }
+  ],
+  "services": [
+    "Bathing",
+    "Dental Care",
+    "Fully Stocked Pharmacy",
+    "Immunization and Wellness Care",
+    "Microchipping",
+    "Nutritional Counseling",
+    "Pain Management",
+    "Radiology (X-Rays)",
+    "Surgery",
+    "Ultrasound"
+  ],
+  "animals": ["Dogs", "Cats", "Ferrets"],
+  "brand": {
+    "palette": {
+      "burgundy": "#A90A30",
+      "deepBurgundy": "#5E101D",
+      "olive": "#869F12",
+      "warmNeutral": "#B5AC98",
+      "lightNeutral": "#DEDEDE",
+      "text": "#545454"
+    },
+    "logoFallback": "frontend/public/brand/cambria-logo.svg",
+    "markFallback": "frontend/public/brand/cambria-mark.svg",
+    "faviconStatus": "Generated local Cambria monogram icons because source-specific logo/favicon was unavailable."
+  },
+  "booking": {
+    "seededTypes": ["Wellness Exam", "Sick Pet Visit", "Dental Consultation", "Surgery Consultation", "Tech Appointment"],
+    "hoursSeeded": true,
+    "notes": "Seed is idempotent via backend/seed_booking.py and runs from backend/seed.py during app startup."
+  },
+  "chatbot": {
+    "provider": "litellm/OpenAI-compatible",
+    "envKey": "OPENAI_API_KEY",
+    "knowledgeBasePlan": "Use source-confirmed clinic info, hours, phone, address, staff owner listing, services, dogs/cats/ferrets, and conservative referral language for unconfirmed species or policies."
+  },
+  "novaSiteEditor": {
+    "demoDefault": "disabled until secrets and callback URL are configured",
+    "siteIdSuggestion": "cambriavet-vetstreet-com"
+  },
+  "openQuestions": [
+    "Whether the practice wants to publish an email address on the new site.",
+    "Whether additional staff biographies or photos are available.",
+    "Whether the site should enable direct online booking or only appointment requests pending phone confirmation.",
+    "Whether source-site contact form should be replaced by a native contact form in production."
+  ]
+}
