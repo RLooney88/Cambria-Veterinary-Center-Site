@@ -15,8 +15,9 @@ from datetime import datetime, timedelta, timezone
 from secrets import token_urlsafe
 
 from dotenv import load_dotenv
-from fastapi import APIRouter, Depends, FastAPI, HTTPException, status
+from fastapi import APIRouter, Depends, FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy import desc, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -1185,7 +1186,20 @@ app.add_middleware(
 # Serve the React build when deployed as a single Railway service.
 FRONTEND_BUILD_DIR = Path(__file__).resolve().parent.parent / "frontend" / "build"
 if FRONTEND_BUILD_DIR.exists():
-    app.mount("/", StaticFiles(directory=str(FRONTEND_BUILD_DIR), html=True), name="frontend")
+    app.mount("/static", StaticFiles(directory=str(FRONTEND_BUILD_DIR / "static")), name="static")
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_react_app(full_path: str, request: Request):
+        # API routes should keep their real 404/405 behavior. Everything else
+        # falls back to React so direct visits to /about, /services, etc. work.
+        if full_path.startswith("api/"):
+            raise HTTPException(status_code=404, detail="Not found")
+
+        requested_file = FRONTEND_BUILD_DIR / full_path
+        if full_path and requested_file.exists() and requested_file.is_file():
+            return FileResponse(requested_file)
+
+        return FileResponse(FRONTEND_BUILD_DIR / "index.html")
 else:
     logger.warning("Frontend build directory not found at %s; API-only mode enabled", FRONTEND_BUILD_DIR)
 
