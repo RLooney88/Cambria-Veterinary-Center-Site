@@ -15,6 +15,8 @@ from database import AsyncSessionLocal
 from models import Client, Pet, ClientPetLink, PetContact, PetHealthRecord, PetAppointment
 
 logger = logging.getLogger(__name__)
+DEMO_EMAIL = "demo@testdemo.com"
+DEMO_PASSWORD_HASH = "$2b$12$m6jZgdTFoAbwu2OGxQPRh.d.dS/T.xMB1254lf0MpjKJCpisP9u6a"
 
 DEMO_CLIENTS = [
     {
@@ -35,8 +37,8 @@ DEMO_CLIENTS = [
         },
     },
     {
-        "email": "demo@demo.com",
-        "password": "Demo2026!",
+        "email": DEMO_EMAIL,
+        "password_hash": DEMO_PASSWORD_HASH,
         "first_name": "Demo",
         "last_name": "Client",
         "phone": "(410) 555-0126",
@@ -72,12 +74,13 @@ APPOINTMENTS = [
 
 async def _ensure_client_with_pet(db, spec: dict) -> None:
     email = spec["email"].lower()
+    credential_hash = spec.get("password_hash") or hash_password(spec["password"])
     res = await db.execute(select(Client).where(Client.email == email))
     client = res.scalar_one_or_none()
     if not client:
         client = Client(
             email=email,
-            password_hash=hash_password(spec["password"]),
+            password_hash=credential_hash,
             first_name=spec["first_name"],
             last_name=spec["last_name"],
             phone=spec.get("phone"),
@@ -90,7 +93,7 @@ async def _ensure_client_with_pet(db, spec: dict) -> None:
         client.last_name = spec["last_name"]
         client.phone = spec.get("phone")
         # Keep the known demo password usable across cloned demo sites.
-        client.password_hash = hash_password(spec["password"])
+        client.password_hash = credential_hash
 
     pet_spec = spec["pet"]
     pet_res = await db.execute(
